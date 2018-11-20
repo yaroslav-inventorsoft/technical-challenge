@@ -5,12 +5,21 @@ import { ProductModal } from './components/products/edit/modal';
 
 const routes: Routes = [
     {
+        path      : '',
+        redirectTo: 'products',
+        pathMatch : 'full'
+    },
+    {
         path      : 'products',
         component : ProductList
     },
     {
         path      : 'products/:id',
         component : ProductModal
+    },
+    {
+        path      : '**',
+        redirectTo: 'products'
     }
 ];
 
