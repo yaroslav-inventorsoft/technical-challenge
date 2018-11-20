@@ -14,7 +14,7 @@
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
                         "outputPath": "docs",
-                        "baseHref" : "https://yaroslav-inventorsoft.github.io/technical-challenge/products/",
+                        "baseHref" : "https://yaroslav-inventorsoft.github.io/technical-challenge/",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",

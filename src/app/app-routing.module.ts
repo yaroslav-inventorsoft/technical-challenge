@@ -4,11 +4,6 @@ import { ProductList } from './components/products/product.list';
 import { ProductModal } from './components/products/edit/modal';
 
 const routes: Routes = [
-    /*{
-        path      : '',
-        redirectTo: 'products',
-        pathMatch : 'full'
-    },*/
     {
         path      : 'products',
         component : ProductList
@@ -16,10 +11,6 @@ const routes: Routes = [
     {
         path      : 'products/:id',
         component : ProductModal
-    },
-    {
-        path      : '**',
-        redirectTo: 'products'
     }
 ];
 
