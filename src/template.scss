@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    .mat-dialog-container {
+        padding: 0;
+    }
+}
+
+.mat-dialog-container {
+    padding: 0;
+}
+
+.mat-card-subtitle:not(:first-child),
+.mat-card-title:not(:first-child) {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-view {
+    .mat-radio-label {
+        display: flex;
+        justify-content: space-between;
+    }
+    .mat-list-item-content {
+        .mat-radio-label {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

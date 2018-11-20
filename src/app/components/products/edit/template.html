@@ -1,0 +1,144 @@
+<div class="modal-view" *ngIf="isReady">
+    <form (ngSubmit)="onSubmit()"
+          [formGroup]="productForm"
+          autocomplete="off"
+          novalidate>
+
+        <div class="modal-header-image">
+            <button mat-mini-fab
+                    type="button"
+                    (click)="onCancel($event)"
+                    color="accent"
+                    class="back-button"
+                    md-icon-button>
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <img mat-card-image
+                 [src]="headerImg"
+                 alt="Product Image"
+                 class="product-image">
+        </div>
+
+        <section class="mat-typography product-head-details">
+            <h1 [innerText]="details.name"></h1>
+            <h3 [innerText]="details.description"></h3>
+        </section>
+        <mat-divider></mat-divider>
+
+        <div class="product-counter">
+            <div>
+                <section class="mat-typography">
+                    <h1>$ {{ details.price }} </h1>
+                </section>
+            </div>
+
+            <div class="quantity-button">
+                <button
+                    mat-mini-fab
+                    type="button"
+                    [disabled]="productQuantity <= 1"
+                    (click)="onReduceQuantity()"
+                    class="bg-button-accent">-</button>
+                <h2>{{ productQuantity }}</h2>
+                <button
+                    mat-mini-fab
+                    type="button"
+                    (click)="onIncreaseQuantity()"
+                    class="bg-button-primary">+</button>
+            </div>
+        </div>
+
+        <mat-toolbar color="basic" class="bg-header">
+            <section class="mat-typography">
+                <h2>MILK OPTION (REQUIRED)</h2>
+            </section>
+        </mat-toolbar>
+
+        <section class="mat-typography error-block" *ngIf="isValidMilkOption">
+            <mat-error class="error-message">Please select 1 item</mat-error>
+        </section>
+
+        <mat-list role="list">
+            <mat-radio-group
+                class="milk-options"
+                formControlName="milkOption"
+                (change)="onCalculate()">
+                <ng-container *ngFor="let milk of milkOptionList">
+                    <mat-list-item>
+                        <mat-radio-button class="milk-radio-button"
+                                          [value]="milk"
+                                          labelPosition="before">
+                            {{ milk.name }}
+                            <ng-container *ngIf="milk.price">
+                                ({{milk.price | currency:'USD':'symbol':'.0' }})
+                            </ng-container>
+                        </mat-radio-button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </ng-container>
+            </mat-radio-group>
+        </mat-list>
+
+        <mat-toolbar color="basic">
+            <section class="mat-typography syrup-options">
+                <h2>SYRUP OPTION</h2>
+                <button
+                    mat-button
+                    type="button"
+                    (click)="onResetSyrup()">reset</button>
+            </section>
+        </mat-toolbar>
+
+        <mat-list role="list">
+            <mat-radio-group class="syrup-radio-group"
+                             formControlName="syrupOption"
+                             (change)="onCalculate()">
+                <ng-container *ngFor="let syrup of syrupOptionList">
+                    <mat-list-item>
+                        <mat-radio-button
+                            class="syrup-radio-button"
+                            [value]="syrup"
+                            labelPosition="before">
+                                {{ syrup.name }}
+                            <ng-container *ngIf="syrup.price">
+                                ({{ syrup.price | currency:'USD':'symbol':'.0' }})
+                            </ng-container>
+                        </mat-radio-button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </ng-container>
+            </mat-radio-group>
+        </mat-list>
+
+        <mat-toolbar color="basic">
+            <section class="mat-typography">
+                <h2>CHOCOLADE</h2>
+            </section>
+        </mat-toolbar>
+        <mat-list role="list">
+            <mat-selection-list
+                formControlName="chocoladeOption"
+                (selectionChange)="onCalculate()">
+                <mat-list-option *ngFor="let chocolade of chocoladeOptionList"
+                                 [value]="chocolade">
+                    {{ chocolade.name }}
+                    <ng-container *ngIf="chocolade.price">
+                        ({{ chocolade.price | currency:'USD':'symbol':'.0' }})
+                    </ng-container>
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-list>
+
+        <mat-dialog-actions>
+            <button mat-raised-button
+                    color="accent"
+                    type="submit">
+                <div class="add-button">
+                    <mat-icon>shopping_cart</mat-icon>
+                    <span>ADD {{ productQuantity }} TO CART</span>
+                    <span>{{ sum | currency:'USD':'symbol':'.0' }}</span>
+                </div>
+            </button>
+        </mat-dialog-actions>
+    </form>
+</div>
